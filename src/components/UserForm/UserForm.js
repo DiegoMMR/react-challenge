@@ -115,7 +115,7 @@ function UserForm({ title, user, setUser, submitForm }) {
         {errors.country && <p className="text-error">{errors.country}</p>}
       </div>
       <div>
-        <input id="submit" className="button" type="submit" value="Aceptar" />
+        <input id="submit" className="button" type="submit" value="Submit" />
       </div>
     </form>
   );
