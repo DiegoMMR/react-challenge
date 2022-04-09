@@ -7,11 +7,20 @@ export const add_user = (newUser) => {
   };
 };
 
-export const remove_user = (index) => {
+export const remove_user = (id) => {
   return {
     type: "user/remove",
     payload: {
-      index,
+      id,
+    },
+  };
+};
+
+export const update_user = (user) => {
+  return {
+    type: "user/update",
+    payload: {
+      user,
     },
   };
 };

@@ -1,9 +1,6 @@
 import React from "react";
-
 import { Switch, Route, NavLink } from "react-router-dom";
-
 import UserList from "./components/UserList/UserList";
-
 import "./styles.scss";
 
 function App() {

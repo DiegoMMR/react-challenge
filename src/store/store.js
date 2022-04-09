@@ -1,4 +1,15 @@
 import { createStore } from "redux";
-import reducer from "./reducer";
+import { UserReducer } from "./reducer";
 
-export default createStore(reducer);
+const users = localStorage.getItem("users");
+let initialState = { users: [] };
+
+if (users) {
+  initialState.users = JSON.parse(users);
+}
+
+function configureStore(state = initialState) {
+  return createStore(UserReducer, state);
+}
+
+export default configureStore;
