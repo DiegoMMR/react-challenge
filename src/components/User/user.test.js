@@ -1,32 +1,37 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureStore from "../../store/store";
 import "@testing-library/jest-dom/extend-expect";
 
 import User from "./User";
 
-const data = { name: "Juan", email: "arg@gmail.com", phone: "+543242343", country: "AR" };
+const user = { name: "Juan", email: "arg@gmail.com", phone: "+543242343", country: "AR" };
 
 describe("Render User", () => {
-  beforeEach(() =>
+  beforeEach(() => {
+    const store = configureStore();
     render(
-      <table className="table">
-        <tbody>
-          <User name={data.name} email={data.email} phone={data.phone} country={data.country} />
-        </tbody>
-      </table>
-    )
-  );
+      <Provider store={store}>
+        <table className="table">
+          <tbody>
+            <User id={user.id} name={user.name} email={user.email} phone={user.phone} country={user.country} />
+          </tbody>
+        </table>
+      </Provider>
+    );
+  });
 
   it("Render Name", () => {
-    expect(screen.getByText(data.name)).toBeInTheDocument();
+    expect(screen.getByText(user.name)).toBeInTheDocument();
   });
   it("Render Email", () => {
-    expect(screen.getByText(data.email)).toBeInTheDocument();
+    expect(screen.getByText(user.email)).toBeInTheDocument();
   });
   it("Render Phone", () => {
-    expect(screen.getByText(data.phone)).toBeInTheDocument();
+    expect(screen.getByText(user.phone)).toBeInTheDocument();
   });
   it("Render Country", () => {
-    expect(screen.getByText(data.country)).toBeInTheDocument();
+    expect(screen.getByText(user.country)).toBeInTheDocument();
   });
 });

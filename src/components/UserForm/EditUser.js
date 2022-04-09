@@ -1,20 +1,23 @@
 import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import Modal from "../Modal/Modal";
 import UserForm from "./UserForm";
+import { update_user } from "../../store/actions";
 
 import "../../styles/components.scss";
 import "../../styles/UserForm.scss";
 
-const CreateUser = ({ user, updateUser }) => {
+const CreateUser = ({ user }) => {
   const [tempUser, setUser] = useState(user);
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
   const handleSubmit = () => {
-    updateUser(tempUser);
+    dispatch(update_user(tempUser));
     toggleModal();
   };
 

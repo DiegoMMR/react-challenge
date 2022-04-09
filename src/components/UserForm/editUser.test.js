@@ -1,5 +1,7 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureStore from "../../store/store";
 import "@testing-library/jest-dom/extend-expect";
 
 import EditUser from "./EditUser";
@@ -11,7 +13,14 @@ describe("Render EditUser", () => {
     users = users.map((u) => (u.id === user.id ? user : u));
   };
 
-  beforeEach(() => render(<EditUser user={users[0]} updateUser={updateUser} />));
+  beforeEach(() => {
+    const store = configureStore({ users });
+    render(
+      <Provider store={store}>
+        <EditUser user={users[0]} updateUser={updateUser} />
+      </Provider>
+    );
+  });
 
   it("put user name", () => {
     const input = document.getElementsByName("name")[0];

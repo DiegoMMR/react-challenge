@@ -1,14 +1,17 @@
 import React from "react";
 import EditUser from "../UserForm/EditUser";
+import { useDispatch } from "react-redux";
+import { remove_user } from "../../store/actions";
 
 import "../../styles/User.scss";
 import "../../styles/components.scss";
 
 const User = (props) => {
-  const { id, name, email, phone, country, removeUser, updateUser } = props;
+  const { id, name, email, phone, country } = props;
+  const dispatch = useDispatch();
 
   const handleRemove = () => {
-    removeUser(id);
+    dispatch(remove_user(id));
   };
 
   return (
@@ -21,7 +24,7 @@ const User = (props) => {
         <button className="button btn-danger" onClick={handleRemove}>
           Remove
         </button>
-        <EditUser user={props} updateUser={updateUser} />
+        <EditUser user={props} />
       </td>
     </tr>
   );

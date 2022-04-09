@@ -1,20 +1,25 @@
 import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import { add_user } from "../../store/actions";
+
+import { v4 as uuidv4 } from "uuid";
 import Modal from "../Modal/Modal";
 import UserForm from "./UserForm";
 
 import "../../styles/components.scss";
 import "../../styles/UserForm.scss";
 
-const CreateUser = ({ addUser }) => {
+const CreateUser = () => {
   const [user, setUser] = useState({ name: "", email: "", phone: "", country: "" });
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
   const handleSubmit = () => {
-    addUser(user);
+    dispatch(add_user({ ...user, id: uuidv4() }));
     toggleModal();
     setUser({ name: "", email: "", phone: "", country: "" });
   };

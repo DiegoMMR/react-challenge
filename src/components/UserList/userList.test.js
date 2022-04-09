@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureStore from "../../store/store";
 import "@testing-library/jest-dom/extend-expect";
-
 import UserList from "./UserList";
 
 var localStorageMock = (function () {
@@ -25,14 +26,21 @@ var localStorageMock = (function () {
 Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
 describe("Render UserList", () => {
-  const initalData = [
+  const users = [
     { id: "1", name: "Juan", email: "arg@gmail.com", phone: "+543242343", country: "AR" },
     { id: "2", name: "Leao", email: "salsa@gmail.com", phone: "+336724215", country: "BR" },
   ];
 
-  localStorageMock.setItem("users", JSON.stringify(initalData));
+  localStorageMock.setItem("users", JSON.stringify(users));
 
-  beforeEach(() => render(<UserList />));
+  beforeEach(() => {
+    const store = configureStore({ users });
+    render(
+      <Provider store={store}>
+        <UserList />
+      </Provider>
+    );
+  });
 
   it("Render table rows", () => {
     const rows = screen.getAllByRole("row");
@@ -45,14 +53,14 @@ describe("Render UserList", () => {
   });
 
   it("Render User name on Table", () => {
-    expect(screen.getByText(initalData[0].name)).toBeInTheDocument();
+    expect(screen.getByText(users[0].name)).toBeInTheDocument();
   });
 
   it("Render User email on Table", () => {
-    expect(screen.getByText(initalData[0].email)).toBeInTheDocument();
+    expect(screen.getByText(users[0].email)).toBeInTheDocument();
   });
 
   it("Render User phone on Table", () => {
-    expect(screen.getByText(initalData[0].phone)).toBeInTheDocument();
+    expect(screen.getByText(users[0].phone)).toBeInTheDocument();
   });
 });

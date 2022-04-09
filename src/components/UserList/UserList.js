@@ -1,31 +1,16 @@
 import React, { Fragment } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
 import User from "../User/User";
 import CreateUser from "../UserForm/CreateUser";
-import { add_user, remove_user, update_user } from "../../store/actions";
 
 import "../../styles/UserList.scss";
 
 const UserList = () => {
   const users = useSelector((state) => state.users);
-  const dispatch = useDispatch();
-
-  const addUser = (user) => {
-    dispatch(add_user({ ...user, id: uuidv4() }));
-  };
-
-  const removeUser = (id) => {
-    dispatch(remove_user(id));
-  };
-
-  const updateUser = (user) => {
-    dispatch(update_user(user));
-  };
 
   return (
     <Fragment>
-      <CreateUser addUser={addUser} />
+      <CreateUser />
 
       <div className="table-container">
         <table className="table">
@@ -47,8 +32,6 @@ const UserList = () => {
                 email={user.email}
                 phone={user.phone}
                 country={user.country}
-                removeUser={removeUser}
-                updateUser={updateUser}
               />
             ))}
           </tbody>
