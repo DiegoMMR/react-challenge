@@ -1,0 +1,26 @@
+.table-container {
+  overflow-x: auto !important;
+}
+
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+//mobile table
+@media (max-width: 768px) {
+  .table {
+    width: 600px;
+  }
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 15px 0;
+}
+
+.table td {
+  border-bottom: 1px solid #7d60f5;
+}
