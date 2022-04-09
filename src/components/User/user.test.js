@@ -9,11 +9,11 @@ const data = { name: "Juan", email: "arg@gmail.com", phone: "+543242343", countr
 describe("Render User", () => {
   beforeEach(() =>
     render(
-      <User
-        name={data.name}
-        email={data.email}
-        phone={data.phone}
-      />
+      <table className="table">
+        <tbody>
+          <User name={data.name} email={data.email} phone={data.phone} country={data.country} />
+        </tbody>
+      </table>
     )
   );
 
@@ -21,13 +21,12 @@ describe("Render User", () => {
     expect(screen.getByText(data.name)).toBeInTheDocument();
   });
   it("Render Email", () => {
-    expect(screen.getByText(data.mail)).toBeInTheDocument();
+    expect(screen.getByText(data.email)).toBeInTheDocument();
   });
   it("Render Phone", () => {
     expect(screen.getByText(data.phone)).toBeInTheDocument();
   });
   it("Render Country", () => {
-    expect(
-      screen.getByText(data.country)).toBeInTheDocument();
+    expect(screen.getByText(data.country)).toBeInTheDocument();
   });
 });

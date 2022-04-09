@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import User from "../User/User";
 import CreateUser from "../UserForm/CreateUser";
 
-import "./_user-list.scss";
+import "../../styles/UserList.scss";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -42,7 +42,8 @@ const UserList = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
-              <th></th>
+              <th>Country</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

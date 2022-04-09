@@ -2,32 +2,57 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import UserList from "./UsersList";
+import UserList from "./UserList";
+
+var localStorageMock = (function () {
+  var store = {};
+  return {
+    getItem: function (key) {
+      return store[key];
+    },
+    setItem: function (key, value) {
+      store[key] = value.toString();
+    },
+    clear: function () {
+      store = {};
+    },
+    removeItem: function (key) {
+      delete store[key];
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
 describe("Render UserList", () => {
-  beforeEach(() =>
-    render(
-      <UserList />
-    )
-  );
+  const initalData = [
+    { id: "1", name: "Juan", email: "arg@gmail.com", phone: "+543242343", country: "AR" },
+    { id: "2", name: "Leao", email: "salsa@gmail.com", phone: "+336724215", country: "BR" },
+  ];
 
-  it("Render Header Name Table", () => {
-    expect(screen.getByText('Name')).toBeInTheDocument();
+  localStorageMock.setItem("users", JSON.stringify(initalData));
+
+  beforeEach(() => render(<UserList />));
+
+  it("Render table rows", () => {
+    const rows = screen.getAllByRole("row");
+    expect(rows.length).toBe(3);
   });
 
-  it("Render Header Email Table", () => {
-    expect(screen.getByText('Email')).toBeInTheDocument();
+  it("Render table headers", () => {
+    const headers = screen.getAllByRole("columnheader");
+    expect(headers.length).toBe(5);
   });
 
-  it("Render Header Phone Table", () => {
-    expect(screen.getByText('Telefono')).toBeInTheDocument();
+  it("Render User name on Table", () => {
+    expect(screen.getByText(initalData[0].name)).toBeInTheDocument();
   });
 
-  it("Render Header Country Table", () => {
-    expect(screen.getByText('Country')).toBeInTheDocument();
+  it("Render User email on Table", () => {
+    expect(screen.getByText(initalData[0].email)).toBeInTheDocument();
   });
 
-  it("Render Body Name Table", () => {
-    expect(screen.getByText('Juan')).toBeInTheDocument();
+  it("Render User phone on Table", () => {
+    expect(screen.getByText(initalData[0].phone)).toBeInTheDocument();
   });
 });

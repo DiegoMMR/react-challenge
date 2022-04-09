@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import Modal from "../Modal/Modal";
 import UserForm from "./UserForm";
 
-import "../components.scss";
-import "./UserForm.scss";
+import "../../styles/components.scss";
+import "../../styles/UserForm.scss";
 
 const CreateUser = ({ user, updateUser }) => {
   const [tempUser, setUser] = useState(user);

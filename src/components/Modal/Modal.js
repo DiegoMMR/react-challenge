@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Modal.scss";
+import "../../styles/Modal.scss";
 
 const Modal = ({ children, customClass, show, closeCallback }) => (
   <div className={`modal ${customClass}`} style={{ display: show ? "block" : "none" }}>
@@ -8,7 +8,7 @@ const Modal = ({ children, customClass, show, closeCallback }) => (
     <div className="modal_content">
       {children}
       <button title="Close" className="close_modal" onClick={closeCallback}>
-        <i className="fas fa-times"></i>
+        X
       </button>
     </div>
   </div>

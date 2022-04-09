@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import "../components.scss";
-import "./UserForm.scss";
+import "../../styles/components.scss";
+import "../../styles/UserForm.scss";
 
 function UserForm({ title, user, setUser, submitForm }) {
   const [errors, setErrors] = useState({});
@@ -84,38 +84,38 @@ function UserForm({ title, user, setUser, submitForm }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="centered">
+    <form aria-label="form" onSubmit={handleSubmit} className="centered">
       <h2>{title}</h2>
       <div>
-        <label htmlFor="" className="label">
+        <label htmlFor="name" className="label">
           Name
         </label>
         <input placeholder="Name" name="name" type="text" value={user.name} onChange={handleInputChange} />
         {errors.name && <p className="text-error">{errors.name}</p>}
       </div>
       <div>
-        <label htmlFor="" className="label">
+        <label htmlFor="email" className="label">
           Email
         </label>
         <input placeholder="Email" name="email" type="text" value={user.email} onChange={handleInputChange} />
         {errors.email && <p className="text-error">{errors.email}</p>}
       </div>
       <div>
-        <label htmlFor="" className="label">
+        <label htmlFor="phone" className="label">
           Phone
         </label>
         <input placeholder="Phone" name="phone" type="text" value={user.phone} onChange={handleInputChange} />
         {errors.phone && <p className="text-error">{errors.phone}</p>}
       </div>
       <div>
-        <label htmlFor="" className="label">
-          País
+        <label htmlFor="country" className="label">
+          Country
         </label>
         <input placeholder="Country" name="country" type="text" value={user.country} onChange={handleInputChange} />
         {errors.country && <p className="text-error">{errors.country}</p>}
       </div>
       <div>
-        <input className="button" type="submit" value="Aceptar" />
+        <input id="submit" className="button" type="submit" value="Aceptar" />
       </div>
     </form>
   );
